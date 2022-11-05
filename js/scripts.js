@@ -88,6 +88,7 @@ class Calculator {
            //adicionar valor atual no valor anterior
            this.previousOperationText.innerText = `${operationValue} ${operation}`;
            this.currentOperationText.innerText = "";
+
        }
     }
 
@@ -117,10 +118,13 @@ class Calculator {
     }
     //mostrar resultado total
     processEqualsOperation() {
-        const operation = +this.previousOperationText.innerText.split (" ")[1];
+        const operation = this.previousOperationText.innerText.split (" ")[1];
 
         this.processOperation(operation);
+
+
     }
+
 }
 
 const calc = new Calculator(previousOperationText, currentOperationText);
@@ -135,4 +139,24 @@ buttons.forEach ((btn) => {
             calc.processOperation(value);
         }
     });
+});
+
+window.addEventListener("keydown", (e) => {
+    const value = e.key;
+
+    if(+value >= 0 || value === ".") {
+        calc.addDigit(value);
+    } else {
+        calc.processOperation(value)
+    }
+
+    if(value == "Enter") {
+        calc.processOperation("=");
+        calc.processEqualsOperation();
+    }
+
+    if(value == "Backspace") {
+        calc.processOperation("DEL");
+        calc.processDelOperation();
+    }
 });
