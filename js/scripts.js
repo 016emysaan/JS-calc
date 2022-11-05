@@ -157,6 +157,16 @@ window.addEventListener("keydown", (e) => {
 
     if(value == "Backspace") {
         calc.processOperation("DEL");
-        calc.processDelOperation();
+        calc.processOperation();
+    }
+
+    if(value == "Escape") {
+        calc.processOperation("C");
+        calc.processOperation();
+    }
+
+    if(value == "'") {
+        calc.processOperation("CE");
+        calc.processOperation();
     }
 });
